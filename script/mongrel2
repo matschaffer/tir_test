@@ -1,0 +1,16 @@
+#!/bin/sh
+
+cd `dirname $0`
+cd ..
+
+export LD_LIBRARY_PATH="`pwd`/vendor/lib"
+export PATH="`pwd`/vendor/bin:$PATH"
+
+CONF=conf/mongrel2.conf
+DB=conf/mongrel2.sqlite
+
+m2sh load -config $CONF --db $DB
+
+mkdir -p run logs tmp
+
+m2sh start --db $DB -host localhost

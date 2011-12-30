@@ -1,1 +1,5 @@
 /vendor
+/run
+/tmp
+/logs
+/conf/mongrel2.sqlite
