@@ -1,0 +1,10 @@
+#!/bin/sh
+
+VERSION=2.0.7
+
+curl -LO http://luarocks.org/releases/luarocks-$VERSION.tar.gz
+tar -zxf luarocks-$VERSION.tar.gz
+cd luarocks-$VERSION
+./configure --prefix=$PREFIX
+make
+make install

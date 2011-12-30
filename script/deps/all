@@ -8,9 +8,13 @@ mkdir -p vendor/src
 cd vendor
 
 export PREFIX=`pwd`
+export PATH="$PREFIX/bin:$PATH"
 
 cd src
 
 $DEPS/uuid
 $DEPS/zeromq
 $DEPS/mongrel2
+$DEPS/lua
+$DEPS/luarocks
+$DEPS/tir
