@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cd `dirname $0`
+DEPS=`pwd`
+cd ../..
+
+mkdir -p vendor/src
+cd vendor
+
+export PREFIX=`pwd`
+
+cd src
+
+# $DEPS/uuid
+# $DEPS/zeromq
+$DEPS/mongrel2

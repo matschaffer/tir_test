@@ -1,0 +1,10 @@
+#!/bin/sh
+
+VERSION=2.1.11
+
+curl -LO http://download.zeromq.org/zeromq-$VERSION.tar.gz
+tar -zxf zeromq-$VERSION.tar.gz
+cd zeromq-$VERSION
+./configure --prefix=$PREFIX
+make
+make install
