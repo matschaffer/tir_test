@@ -6,6 +6,6 @@ curl -LO http://mongrel2.org/static/downloads/mongrel2-$VERSION.tar.bz2
 tar -jxf mongrel2-$VERSION.tar.bz2
 cd mongrel2-$VERSION
 export LD_LIBRARY_PATH="$PREFIX/lib"
-export OPTFLAGS="-I$PREFIX/include"
+export OPTFLAGS="-I$PREFIX/include -L$PREFIX/lib"
 make
 make install

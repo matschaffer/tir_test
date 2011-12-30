@@ -11,6 +11,6 @@ export PREFIX=`pwd`
 
 cd src
 
-# $DEPS/uuid
-# $DEPS/zeromq
+$DEPS/uuid
+$DEPS/zeromq
 $DEPS/mongrel2
