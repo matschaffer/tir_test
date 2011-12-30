@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=5.2.0
+VERSION=5.1.4
 
 curl -LO http://www.lua.org/ftp/lua-$VERSION.tar.gz
 tar -zxf lua-$VERSION.tar.gz
