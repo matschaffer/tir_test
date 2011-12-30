@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cd `dirname $0`
+cd ..
+
+echo 'Use ^\ to quit'
+vendor/bin/tir start -app app/hello.lua
