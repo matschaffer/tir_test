@@ -20,5 +20,5 @@ case $1 in
     m2sh start -db $DB -every
     ;;
   *)
-    exec $0 start
+    exec script/mongrel2 start
 esac
