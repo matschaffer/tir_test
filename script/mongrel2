@@ -9,8 +9,16 @@ export PATH="`pwd`/vendor/bin:$PATH"
 CONF=conf/mongrel2.conf
 DB=conf/mongrel2.sqlite
 
-m2sh load -config $CONF --db $DB
-
 mkdir -p run logs tmp
 
-m2sh start --db $DB -host localhost
+case $1 in
+  stop)
+    m2sh stop -db $DB -host localhost
+    ;;
+  start)
+    m2sh load  -db $DB -config $CONF
+    m2sh start -db $DB -host localhost
+    ;;
+  *)
+    exec $0 start
+esac
