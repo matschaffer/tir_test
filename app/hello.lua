@@ -1,9 +1,7 @@
-print "hey I'm starting"
 require 'tir.engine'
 
 function main(web, req)
-  web:ok()
+  web:page(Tir.view("index.html") {})
 end
 
-print "Here goes tir"
 Tir.stateless {route='/hello', main=main}
