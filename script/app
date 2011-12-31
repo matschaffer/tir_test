@@ -3,5 +3,7 @@
 cd `dirname $0`
 cd ..
 
+export PATH="`pwd`/vendor/bin:$PATH"
+
 echo 'Use ^\ to quit'
-vendor/bin/tir start -app app/hello.lua
+tir start -app app/hello.lua
