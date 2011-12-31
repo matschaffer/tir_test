@@ -1,5 +1,4 @@
 #!/bin/bash
 
 source `dirname $0`/env
-echo 'Use ^\ to quit'
-tir start
+tir test
