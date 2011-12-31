@@ -1,23 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 
-cd `dirname $0`
-cd ..
+source `dirname $0`/env
 
-export LD_LIBRARY_PATH="`pwd`/vendor/lib"
-export PATH="`pwd`/vendor/bin:$PATH"
-
-CONF=conf/mongrel2.conf
-DB=conf/mongrel2.sqlite
+CONF="$BASE/conf/mongrel2.conf"
+DB="$BASE/conf/mongrel2.sqlite"
 
 mkdir -p run logs tmp
 
 case $1 in
   stop)
-    m2sh stop -db $DB -every
+    m2sh stop -db "$DB" -every
     ;;
   start)
-    m2sh load  -db $DB -config $CONF
-    m2sh start -db $DB -every
+    m2sh load  -db "$DB" -config "$CONF"
+    m2sh start -db "$DB" -every
     ;;
   *)
     exec script/mongrel2 start

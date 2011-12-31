@@ -1,0 +1,84 @@
+#!/bin/bash
+
+source `dirname $0`/env
+
+cd "$BASE"
+
+mkdir -p vendor/src
+cd vendor
+
+export PREFIX=`pwd`
+
+cd src
+
+### uuid
+
+cat <<TXT
+---> NOTE: building UUID yourself is tricky, so
+           we'll just use apt-get for now
+TXT
+sudo apt-get install -y uuid-dev
+
+### zeromq
+
+VERSION=2.1.11
+
+curl -LO http://download.zeromq.org/zeromq-$VERSION.tar.gz
+tar -zxf zeromq-$VERSION.tar.gz
+cd zeromq-$VERSION
+./configure --prefix=$PREFIX
+make
+make install
+cd -
+
+### mongrel2
+
+VERSION=1.7.5
+
+curl -LO http://mongrel2.org/static/downloads/mongrel2-$VERSION.tar.bz2
+tar -jxf mongrel2-$VERSION.tar.bz2
+cd mongrel2-$VERSION
+export LD_LIBRARY_PATH="$PREFIX/lib"
+export OPTFLAGS="-I$PREFIX/include -L$PREFIX/lib"
+make
+make install
+cd -
+
+### lua
+
+VERSION=5.1.4
+
+curl -LO http://www.lua.org/ftp/lua-$VERSION.tar.gz
+tar -zxf lua-$VERSION.tar.gz
+cd lua-$VERSION
+sed -i.bak \
+    -e "s|PLAT= none|PLAT= linux|" \
+    -e "s|INSTALL_TOP= /usr/local|INSTALL_TOP= $PREFIX|" \
+    Makefile
+make
+make install
+cd -
+
+### luarocks
+
+VERSION=2.0.7
+
+curl -LO http://luarocks.org/releases/luarocks-$VERSION.tar.gz
+tar -zxf luarocks-$VERSION.tar.gz
+cd luarocks-$VERSION
+./configure --prefix=$PREFIX
+make
+make install
+cd -
+
+### tir
+
+luarocks install lua_signal
+
+curl -OL https://github.com/iamaleksey/lua-zmq/raw/master/rockspecs/lua-zmq-scm-0.rockspec
+luarocks install lua-zmq-scm-0.rockspec
+
+curl -O https://raw.github.com/jsimmons/tnetstrings.lua/master/rockspecs/tnetstrings-scm-0.rockspec
+luarocks install tnetstrings-scm-0.rockspec
+
+luarocks install https://raw.github.com/zedshaw/Tir/master/rockspec/tir-0.9-3.rockspec
